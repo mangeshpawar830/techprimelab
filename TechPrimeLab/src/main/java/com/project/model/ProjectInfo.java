@@ -1,11 +1,13 @@
 package com.project.model;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.Date;
 
 @Data
 @Entity
+@Getter
 public class ProjectInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

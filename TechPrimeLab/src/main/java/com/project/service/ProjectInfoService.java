@@ -50,7 +50,6 @@ public class ProjectInfoService {
         return projectInfoRepository.findByPronameContainingIgnoreCase(projectName);
     }
 
-    // Sorting methods
 
     public List<ProjectInfo> getAllProjectInfosSortedByName() {
         return projectInfoRepository.findAll(Sort.by(Sort.Direction.ASC, "proname"));
