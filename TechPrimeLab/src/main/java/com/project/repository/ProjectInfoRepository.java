@@ -28,4 +28,7 @@ public interface ProjectInfoRepository extends JpaRepository<ProjectInfo, Serial
     	       "JOIN pi.projectStatus ps " +
     	       "GROUP BY pd.pdname")
     	List<Object> getDepartmentProjectSummary();
+   
+    @Query("SELECT count(p) FROM ProjectInfo p WHERE p.projectStatus.psname = 'Running' AND p.proenddate < CURRENT_DATE")
+    int countDelayedRunningProjects();
 }

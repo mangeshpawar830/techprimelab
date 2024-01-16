@@ -23,6 +23,8 @@ public interface ProjectStatusRepository extends JpaRepository<ProjectStatus, Se
     
     @Query(value = "select count(*) from project_status", nativeQuery = true)
     int ProjectCount();
+    
+
 
     int countByPsnameEquals(String psname);
     

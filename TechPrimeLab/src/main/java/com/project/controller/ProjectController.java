@@ -10,6 +10,7 @@ import com.project.model.ProjectPriority;
 import com.project.model.ProjectReason;
 import com.project.model.ProjectStatus;
 import com.project.model.ProjectType;
+import com.project.repository.ProjectInfoRepository;
 import com.project.service.ProjectCatagoryService;
 import com.project.service.ProjectDeptService;
 import com.project.service.ProjectDivisionService;
@@ -68,6 +69,9 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectStatusService statusService;
+	
+	@Autowired
+	private ProjectInfoRepository prrepo;
 
 	@PostMapping("/save")
 	public ProjectInfo getProjectCatogory(@RequestBody ProjectDTO data) {
@@ -148,13 +152,15 @@ public class ProjectController {
 		int totalClosedProject = statusService.getProjectCountByPsname("Closed");
 		int totalCancelledProject = statusService.getProjectCountByPsname("Cancelled");
 		int totalRegisteredProject = statusService.getProjectCountByPsname("Registerd");
+		int delayedcountProject=prrepo.countDelayedRunningProjects();
 
 		countMap.put("TotalProjects", String.valueOf(totalProjects));
 		countMap.put("TotalRunningProject", String.valueOf(totalRunningProject));
 		countMap.put("TotalClosedProject", String.valueOf(totalClosedProject));
 		countMap.put("TotalCancelledProject", String.valueOf(totalCancelledProject));
 		countMap.put("TotalRegisteredProject", String.valueOf(totalRegisteredProject));
-
+		countMap.put("TotalDelayedProject", String.valueOf(delayedcountProject));
+		
 		return countMap;
 	}
 
